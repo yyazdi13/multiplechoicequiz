@@ -78,10 +78,29 @@ function nextQuestion(){
 }
 
 function results(){
-    question.innerHTML = "score: " + correct*startTimer;
+    var score = parseInt(correct) + parseInt(startTimer);
+    question.innerHTML = "score: " + score;
     quiz.innerHTML = "correct: " + correct + " " + "incorrect: " + incorrect;
+    quiz.style.fontSize = "24px";
+    quiz.style.color = "sienna";
+    var save = document.createElement("button");
+    save.innerHTML = "type your name and click to save";
+    quiz.append(save);
+    var input = document.createElement("input");
+    input.style.margin = "10px";
+    quiz.append(input);
+    save.addEventListener("click", function (event) {
+      event.preventDefault();
+      var highscore = JSON.parse(localStorage.getItem('highscore')) || [];
+      var userScore = input.value + " " + score;
+      highscore.push(userScore);
+      localStorage.setItem('highscore', JSON.stringify(highscore));
+      timer.innerHTML = highscore;
 
+    });
 }
+
+
 
 
 start.addEventListener("click", function () {    
