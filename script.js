@@ -23,7 +23,7 @@ var questions = [
     },
     {
         title: "script tags go in: ___",
-        choices: ["head", "css", "div", "body"],
+        choices: ["title", "css", "div", "body"],
         answer: 'choice4'
       }
   ];
@@ -92,7 +92,7 @@ function results(){
     save.addEventListener("click", function (event) {
       event.preventDefault();
       var highscore = JSON.parse(localStorage.getItem('highscore')) || [];
-      var userScore = input.value + " " + score;
+      var userScore = input.value + " " + score + " ";
       highscore.push(userScore);
       localStorage.setItem('highscore', JSON.stringify(highscore));
       timer.innerHTML = highscore;
