@@ -5,6 +5,15 @@ body, div {
     justify-content: center;
 }
 
+header{
+    padding: 2%;
+    width: 101%;
+    height: 30px;
+    margin-top: -10px;
+    text-align: center;
+    background-color: peachpuff;
+}
+
 
 #container {
     background-color: peachpuff;
