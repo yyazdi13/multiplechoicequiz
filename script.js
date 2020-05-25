@@ -92,23 +92,28 @@ function results(){
     save.addEventListener("click", function (event) {
       event.preventDefault();
       var highscore = JSON.parse(localStorage.getItem('highscore')) || [];
-      var userScore = {name: input.value, score: score }
-      highscore.push(userScore);
+      var userScore = {name: input.value, score: score };
+      highscore.length <= 5 && highscore.push(userScore);
+     if (highscore.length >= 5){
+       for (let i = 0; i < highscore.length; i++){
+        if (highscore[i].score < userScore.score){
+          highscore.splice(i, 1, userScore);
+          break;
+        }
+      }
+     }
       localStorage.setItem('highscore', JSON.stringify(highscore));
       highscore.map(i => {
         if (highscore.length > 5){
-          highscore.splice(5);
-          if (userScore.score > i.score){
-              highscore.splice(4, 1, userScore);
               highscore.splice(5);
-          }
         }
         var li = document.createElement("li");
         li.innerHTML = i.name + " " + i.score;
         return quiz.append(li);
       }) 
       input.style.visibility = "hidden";
-      // timer.innerHTML = highscore;
+      save.style.visibility = "hidden";
+      timer.innerHTML = "Score Board";
 
     });
 }
