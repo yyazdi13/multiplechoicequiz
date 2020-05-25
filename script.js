@@ -95,7 +95,13 @@ function results(){
       var userScore = input.value + " " + score + " ";
       highscore.push(userScore);
       localStorage.setItem('highscore', JSON.stringify(highscore));
-      timer.innerHTML = highscore;
+      highscore.map(i => {
+        var li = document.createElement("li");
+        li.innerHTML = i;
+        console.log(i);
+        return quiz.append(li);
+      }) 
+      // timer.innerHTML = highscore;
 
     });
 }
