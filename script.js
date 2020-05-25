@@ -92,15 +92,22 @@ function results(){
     save.addEventListener("click", function (event) {
       event.preventDefault();
       var highscore = JSON.parse(localStorage.getItem('highscore')) || [];
-      var userScore = input.value + " " + score + " ";
+      var userScore = {name: input.value, score: score }
       highscore.push(userScore);
       localStorage.setItem('highscore', JSON.stringify(highscore));
       highscore.map(i => {
+        if (highscore.length > 5){
+          highscore.splice(5);
+          if (userScore.score > i.score){
+              highscore.splice(4, 1, userScore);
+              highscore.splice(5);
+          }
+        }
         var li = document.createElement("li");
-        li.innerHTML = i;
-        console.log(i);
+        li.innerHTML = i.name + " " + i.score;
         return quiz.append(li);
       }) 
+      input.style.visibility = "hidden";
       // timer.innerHTML = highscore;
 
     });
